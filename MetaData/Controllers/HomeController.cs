@@ -1,4 +1,7 @@
-﻿using MetaData.Models;
+﻿//using Azure.Core;
+using MetaData.Data;
+using MetaData.Methods;
+using MetaData.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,17 +9,26 @@ namespace MetaData.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //Dependency Injection
+        private readonly ApplicationDbContext _db;
+        private readonly ErrorLogs _errorLogs;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ApplicationDbContext db,
+            ErrorLogs errorLogs
+            )
         {
-            _logger = logger;
+            _db = db;
+            _errorLogs = errorLogs;
         }
 
         public IActionResult Index()
         {
+            //var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
+
             return View();
         }
+
 
         public IActionResult Privacy()
         {

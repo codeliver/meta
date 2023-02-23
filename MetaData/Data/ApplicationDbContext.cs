@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using MetaData.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MetaData.Data
@@ -9,5 +10,9 @@ namespace MetaData.Data
             : base(options)
         {
         }
+
+        public DbSet<Uploader> UploaderTable { get; set; }
+
+        public DbSet<Metadata> MetaDataTable { get; set; }
     }
 }

@@ -1,30 +1,82 @@
-﻿@{
+﻿@*@model MetaData.Models.ViewModels.ImageInput*@
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
-@*<div class="toolbar d-flex flex-stack flex-wrap mb-5 mb-lg-7" id="kt_toolbar">
-    <div class="page-title d-flex flex-column py-1">
-        <h1 class="d-flex align-items-center my-1">
-            <span class="text-dark fw-bold fs-1">All Questions</span>
-            <small class="text-muted fs-6 fw-semibold ms-1">(6,299)</small>
-        </h1>
-    </div>
-    <div class="d-flex align-items-center py-1">
-        <a href="../../demo5/dist/apps/devs/ask.html" class="btn btn-flex btn-sm btn-primary fw-bold border-0 fs-6 h-40px" id="kt_toolbar_primary_button">Ask Question</a>
-    </div>
-</div>*@
 
 <div class="post" id="kt_post">
     <div class="container">
         <div class="row mb-10">
-            <div class="col-md-12 text-center">
-                <div class="">
+            <div class="col-md-12 mt-10 text-center">
+                <div class="mt-10">
                     <h2 style="font-size: 54px; font-weight: 800">Your reliable meta data generator</h2>
                 </div>
                 <div class="">
-                    <p style="font-size: 24px" class="text-muted">View the meta data of all your files, just upload them. 🗂️⬆️☁️</p>
+                    <p style="font-size: 24px" class="text-muted theme-light-show">Easily and efficiently read metadata from images🖼️, videos🎬 and audio🎧 files.</p>
+                    <p style="font-size: 24px" class="text-secondary theme-dark-show">Easily and efficiently read metadata from images🖼️, videos🎬 and audio🎧 files.</p>
                 </div>
+            </div>
+        </div>
+        <div class="row mb-10 text-center">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <form method="post" asp-controller="Meta" asp-action="Generate" enctype="multipart/form-data" id="kt_upload_form">
+                    <div class="fv-row mb-8">
+                        @*<div class="dropzone py-10" id="kt_upload_files">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Drop files here or click to upload.</h3>
+                                    <span class="fs-7 fw-semibold text-gray-400">Upload JPEG, TIFF WebP, PSD, PNG, BMP, GIF, ICO, PCX and camera RAW files.</span>
+                                </div>
+                            </div>
+                        </div>*@
+                        <input id="uploadBox" type="file" name="file" class="form-control">
+                    </div>
+                    <div class="mb-10">
+                        <button type="button" id="kt_upload_button" class="btn btn-dark">
+                            <span class="indicator-label">Upload file 🚀</span>
+                            <span class="indicator-progress">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2">
             </div>
         </div>
     </div>
 </div>
+
+@*<script src="~/plugins/global/plugins.bundle.js"></script>
+<script src="~/js/scripts.bundle.js"></script>*@
+
+<script type="text/javascript">
+
+    const subButton = document.getElementById('kt_upload_button');
+    const form = document.getElementById('kt_upload_form');
+
+    subButton.addEventListener('click', function () {
+        if (document.getElementById("uploadBox").value == "") {
+            Swal.fire({
+                text: "Please upload an Image!",
+                icon: "error",
+                title: "Oops...",
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-dark"
+                }
+            });
+            return false;
+        }
+        else{
+            form.submit();
+            subButton.setAttribute("data-kt-indicator", "on");
+            return true;
+        }
+    })
+    
+</script>
